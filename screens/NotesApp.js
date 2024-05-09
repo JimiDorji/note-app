@@ -25,6 +25,11 @@ const NotesApp = () => {
     }
   }, [dispatch, noteText]);
 
+  const handleCancelNote = useCallback(() => {
+    setNoteText('');
+    setIsAddingNote(false);
+  }, []);
+
   const memoizedRenderItem = useCallback(
     ({item}) => {
       const handleDelete = () => {
@@ -57,9 +62,13 @@ const NotesApp = () => {
             value={noteText}
             onChangeText={text => setNoteText(text)}
           />
-
           <TouchableOpacity onPress={handleSaveNote} style={styles.saveButton}>
             <Text style={styles.saveButtonText}>Save</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleCancelNote}
+            style={styles.cancelButton}>
+            <Text style={styles.cancelButtonText}>Cancel</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -82,13 +91,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: Platform.OS === 'ios' ? '#f0f0f0' : '#fff', // iOS background color
-  },
-  input: {
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    paddingBottom: 5,
-    fontSize: 16,
-    color: 'black',
   },
   noteInputContainer: {
     marginBottom: 10,
@@ -146,8 +148,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'green',
     borderRadius: 5,
+    marginRight: 10,
   },
   saveButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  cancelButton: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: 'gray',
+    borderRadius: 5,
+  },
+  cancelButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
