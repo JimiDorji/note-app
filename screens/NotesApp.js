@@ -47,16 +47,8 @@ const NotesApp = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your note here"
-        value={noteText}
-        onChangeText={text => setNoteText(text)}
-        onFocus={() => setIsAddingNote(true)} // Show note input when focused
-      />
-      {isAddingNote && ( // Show note input only when isAddingNote is true
+      {isAddingNote && (
         <View style={styles.noteInputContainer}>
-          <Button title="Save" onPress={handleSaveNote} />
           <TextInput
             style={styles.noteInput}
             multiline
@@ -64,6 +56,9 @@ const NotesApp = () => {
             value={noteText}
             onChangeText={text => setNoteText(text)}
           />
+          <TouchableOpacity onPress={handleSaveNote} style={styles.saveButton}>
+            <Text style={styles.saveButtonText}>Save</Text>
+          </TouchableOpacity>
         </View>
       )}
       <FlatList
@@ -94,8 +89,12 @@ const styles = StyleSheet.create({
   },
   noteInputContainer: {
     marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   noteInput: {
+    flex: 1,
     marginBottom: 10,
     borderBottomWidth: 1,
     paddingBottom: 5,
@@ -138,6 +137,17 @@ const styles = StyleSheet.create({
   addButtonText: {
     fontSize: 24,
     color: 'white',
+  },
+  saveButton: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: 'green',
+    borderRadius: 5,
+  },
+  saveButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
