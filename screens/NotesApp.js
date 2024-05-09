@@ -2,18 +2,18 @@ import React, {useState, useMemo, useCallback} from 'react';
 import {
   View,
   TextInput,
-  Button,
   FlatList,
   Text,
   StyleSheet,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {addNote, selectNotes, deleteNote} from '../store/notesSlice';
 
 const NotesApp = () => {
   const [noteText, setNoteText] = useState('');
-  const [isAddingNote, setIsAddingNote] = useState(false); // State to toggle note input
+  const [isAddingNote, setIsAddingNote] = useState(false);
   const dispatch = useDispatch();
   const notes = useSelector(selectNotes);
 
@@ -21,7 +21,7 @@ const NotesApp = () => {
     if (noteText.trim()) {
       dispatch(addNote({id: Math.random(), content: noteText}));
       setNoteText('');
-      setIsAddingNote(false); // Hide note input after saving
+      setIsAddingNote(false);
     }
   }, [dispatch, noteText]);
 
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: Platform.OS === 'ios' ? '#f0f0f0' : '#fff', // iOS background color
   },
   input: {
     marginBottom: 10,
