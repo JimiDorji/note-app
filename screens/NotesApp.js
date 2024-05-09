@@ -53,7 +53,7 @@ const NotesApp = () => {
             style={styles.noteInput}
             multiline
             placeholder="Write your note here..."
-            placeholderTextColor="black" // Set the placeholder text color
+            placeholderTextColor="black"
             value={noteText}
             onChangeText={text => setNoteText(text)}
           />
