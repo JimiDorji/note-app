@@ -53,9 +53,11 @@ const NotesApp = () => {
             style={styles.noteInput}
             multiline
             placeholder="Write your note here..."
+            placeholderTextColor="black" // Set the placeholder text color
             value={noteText}
             onChangeText={text => setNoteText(text)}
           />
+
           <TouchableOpacity onPress={handleSaveNote} style={styles.saveButton}>
             <Text style={styles.saveButtonText}>Save</Text>
           </TouchableOpacity>
